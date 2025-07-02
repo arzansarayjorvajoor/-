@@ -1,1 +1,489 @@
-<h1>فروشگاه من</h1>
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>فروشگاه آنلاین</title>
+  <style>
+    /* CSS پایه و حالت تاریک */
+
+    body {
+      font-family: Tahoma, sans-serif;
+      margin: 0;
+      padding: 0 10px 50px;
+      background: #f7f7f7;
+      color: #222;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    .dark-mode {
+      background: #121212;
+      color: #ddd;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 0;
+      border-bottom: 1px solid #ccc;
+    }
+
+    #searchInput {
+      padding: 6px 10px;
+      font-size: 16px;
+      width: 60%;
+      max-width: 400px;
+      border: 1px solid #aaa;
+      border-radius: 4px;
+      outline: none;
+      transition: border-color 0.3s;
+    }
+    #searchInput:focus {
+      border-color: #007bff;
+    }
+
+    #cart-icon {
+      position: relative;
+      cursor: pointer;
+      font-size: 24px;
+      user-select: none;
+    }
+
+    #cart-icon::before {
+      content: "🛒";
+    }
+
+    #cart-count {
+      position: absolute;
+      top: -8px;
+      left: -8px;
+      background: red;
+      color: white;
+      font-size: 12px;
+      padding: 2px 6px;
+      border-radius: 50%;
+      display: none;
+      user-select: none;
+    }
+
+    /* کشویی سبد خرید */
+    .cart-drawer {
+      position: fixed;
+      top: 0;
+      right: -320px;
+      width: 320px;
+      height: 100%;
+      background: white;
+      box-shadow: -2px 0 8px rgba(0,0,0,0.2);
+      padding: 15px;
+      box-sizing: border-box;
+      transition: right 0.3s ease;
+      overflow-y: auto;
+      z-index: 1000;
+      border-left: 1px solid #ccc;
+    }
+
+    .dark-mode .cart-drawer {
+      background: #222;
+      color: #ddd;
+      border-left-color: #444;
+    }
+
+    .cart-drawer.open {
+      right: 0;
+    }
+
+    .cart-drawer h3 {
+      margin-top: 0;
+      margin-bottom: 10px;
+    }
+
+    #cart-list {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 15px;
+    }
+
+    #cart-list li {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+      font-size: 14px;
+    }
+
+    #cart-list li button {
+      background: red;
+      color: white;
+      border: none;
+      padding: 4px 8px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 12px;
+      user-select: none;
+    }
+
+    .cart-drawer p.total {
+      font-weight: bold;
+      font-size: 16px;
+      border-top: 1px solid #ccc;
+      padding-top: 8px;
+      margin: 10px 0 0;
+    }
+
+    .dark-mode .cart-drawer p.total {
+      border-top-color: #444;
+    }
+
+    /* محصولات */
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .product {
+      background: white;
+      padding: 10px;
+      border-radius: 6px;
+      box-shadow: 0 0 6px rgba(0,0,0,0.1);
+      transition: background 0.3s, color 0.3s;
+    }
+
+    .dark-mode .product {
+      background: #2a2a2a;
+      color: #ddd;
+      box-shadow: 0 0 8px rgba(255,255,255,0.1);
+    }
+
+    .product h2 {
+      margin: 0 0 6px;
+      font-size: 18px;
+    }
+
+    .product p {
+      font-size: 14px;
+      margin: 0 0 10px;
+      min-height: 40px;
+    }
+
+    .product button {
+      padding: 6px 10px;
+      background: #007bff;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+      user-select: none;
+      transition: background 0.3s;
+    }
+
+    .product button:hover {
+      background: #0056b3;
+    }
+
+    /* فرم سفارش */
+    form {
+      margin-top: 30px;
+      max-width: 400px;
+      background: white;
+      padding: 15px;
+      border-radius: 6px;
+      box-shadow: 0 0 6px rgba(0,0,0,0.1);
+      transition: background 0.3s, color 0.3s;
+    }
+
+    .dark-mode form {
+      background: #2a2a2a;
+      color: #ddd;
+      box-shadow: 0 0 8px rgba(255,255,255,0.1);
+    }
+
+    form label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: bold;
+    }
+
+    form input, form textarea {
+      width: 100%;
+      padding: 6px 8px;
+      margin-bottom: 12px;
+      border: 1px solid #aaa;
+      border-radius: 4px;
+      font-size: 14px;
+      outline: none;
+      box-sizing: border-box;
+      transition: border-color 0.3s;
+    }
+
+    form input:focus, form textarea:focus {
+      border-color: #007bff;
+    }
+
+    form button {
+      background: #28a745;
+      color: white;
+      border: none;
+      padding: 8px 15px;
+      font-size: 16px;
+      border-radius: 4px;
+      cursor: pointer;
+      user-select: none;
+      transition: background 0.3s;
+    }
+
+    form button:hover {
+      background: #1e7e34;
+    }
+
+    /* دکمه حالت تاریک */
+    #modeToggle {
+      cursor: pointer;
+      font-size: 22px;
+      user-select: none;
+      background: none;
+      border: none;
+      padding: 0;
+      margin-left: 10px;
+      color: inherit;
+    }
+
+    /* دکمه بازگشت به بالا */
+    #back-to-top {
+      display: none;
+      position: fixed;
+      bottom: 30px;
+      left: 30px;
+      background: #007bff;
+      color: white;
+      padding: 8px 12px;
+      border-radius: 50%;
+      font-size: 20px;
+      cursor: pointer;
+      user-select: none;
+      box-shadow: 0 0 6px rgba(0,0,0,0.2);
+      transition: background 0.3s;
+      z-index: 1001;
+      border: none;
+    }
+
+    #back-to-top:hover {
+      background: #0056b3;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+   <nav>
+  <a href="index.html">خانه</a>
+  <a href="about.html">درباره ما</a>
+  <a href="contact.html">تماس با ما</a>
+</nav>
+    <input type="text" id="searchInput" placeholder="جستجوی محصولات..." oninput="searchProducts()" />
+    <div style="display: flex; align-items: center;">
+      <button id="modeToggle" title="حالت تاریک">🌓</button>
+      <div id="cart-icon" title="مشاهده سبد خرید">
+        <span id="cart-count"></span>
+      </div>
+    </div>
+  </header>
+
+  <section class="products">
+    <div class="product">
+      <h2>گوشی موبایل</h2>
+      <p>یک گوشی موبایل با کیفیت بالا و قیمت مناسب.</p>
+      <button onclick="addToCart('گوشی موبایل', 4500000)">افزودن به سبد</button>
+    </div>
+
+    <div class="product">
+      <h2>هدفون بی‌سیم</h2>
+      <p>هدفونی با کیفیت صدای عالی و بدون سیم.</p>
+      <button onclick="addToCart('هدفون بی‌سیم', 1200000)">افزودن به سبد</button>
+    </div>
+
+    <div class="product">
+      <h2>کوله پشتی</h2>
+      <p>کوله پشتی مقاوم و مناسب برای استفاده روزمره.</p>
+      <button onclick="addToCart('کوله پشتی', 850000)">افزودن به سبد</button>
+    </div>
+  </section>
+
+  <section class="cart-drawer" aria-label="سبد خرید">
+    <h3>سبد خرید</h3>
+    <ul id="cart-list"></ul>
+  </section>
+
+  <form id="orderForm" onsubmit="submitOrder(event)">
+    <h3>ثبت سفارش</h3>
+    <label for="name">نام:</label>
+    <input type="text" id="name" required />
+
+    <label for="phone">شماره تلفن:</label>
+    <input type="tel" id="phone" required />
+
+    <label for="address">آدرس:</label>
+    <textarea id="address" rows="3" required></textarea>
+
+    <button type="submit">ارسال سفارش به واتساپ</button>
+  </form>
+
+  <button id="back-to-top" title="بازگشت به بالا">⬆</button>
+
+  <script>
+    let cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+    let total = parseInt(localStorage.getItem("total")) || 0;
+
+    function saveCart() {
+      localStorage.setItem("cartItems", JSON.stringify(cartItems));
+      localStorage.setItem("total", total.toString());
+    }
+
+    function updateCartCount() {
+      const cartCount = document.getElementById("cart-count");
+      const count = cartItems.length;
+
+      if (count > 0) {
+        cartCount.style.display = "inline-block";
+        cartCount.textContent = count;
+      } else {
+        cartCount.style.display = "none";
+      }
+    }
+
+    function updateCart() {
+      const cartList = document.getElementById("cart-list");
+      cartList.innerHTML = "";
+
+      cartItems.forEach((item, index) => {
+        const li = document.createElement("li");
+        li.innerHTML = `
+          <span>${index + 1}. ${item.name} - ${item.price.toLocaleString()} تومان</span>
+          <button onclick="removeFromCart(${index})">حذف</button>
+        `;
+        cartList.appendChild(li);
+      });
+
+      const existingTotal = document.querySelector(".cart-drawer p.total");
+      if (existingTotal) existingTotal.remove();
+
+      const totalElement = document.createElement("p");
+      totalElement.className = "total";
+      totalElement.textContent = `جمع کل: ${total.toLocaleString()} تومان`;
+      document.querySelector(".cart-drawer").appendChild(totalElement);
+
+      updateCartCount();
+    }
+
+    function addToCart(productName, price) {
+      cartItems.push({ name: productName, price: price });
+      total += price;
+      saveCart();
+      updateCart();
+    }
+
+    function removeFromCart(index) {
+      total -= cartItems[index].price;
+      cartItems.splice(index, 1);
+      saveCart();
+      updateCart();
+    }
+
+    const cartIcon = document.getElementById("cart-icon");
+    const cartDrawer = document.querySelector(".cart-drawer");
+
+    cartIcon.addEventListener("click", () => {
+      cartDrawer.classList.toggle("open");
+    });
+
+    function submitOrder(event) {
+      event.preventDefault();
+
+      const name = document.getElementById("name").value.trim();
+      const phone = document.getElementById("phone").value.trim();
+      const address = document.getElementById("address").value.trim();
+
+      if (!name || !phone || !address) {
+        alert("لطفاً همه فیلدها را پر کنید.");
+        return;
+      }
+
+      if (cartItems.length === 0) {
+        alert("سبد خرید شما خالی است!");
+        return;
+      }
+
+      let message = `🛒 سفارش جدید\n`;
+      message += `👤 نام: ${name}\n📞 شماره: ${phone}\n🏠 آدرس: ${address}\n\n📦 محصولات:\n`;
+
+      cartItems.forEach((item, i) => {
+        message += `${i + 1}. ${item.name} - ${item.price.toLocaleString()} تومان\n`;
+      });
+
+      message += `\n💰 جمع کل: ${total.toLocaleString()} تومان`;
+
+      const encodedMessage = encodeURIComponent(message);
+      const phoneNumber = "989901363145"; // بدون صفر اول
+      const whatsappLink = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+
+      window
+      window.open(whatsappLink, "_blank");
+
+      // بعد از ارسال، سبد رو خالی کنیم و فرم رو ریست کنیم
+      cartItems = [];
+      total = 0;
+      saveCart();
+      updateCart();
+      document.getElementById("orderForm").reset();
+      cartDrawer.classList.remove("open");
+    }
+
+    // جستجو در محصولات
+    function searchProducts() {
+      const input = document.getElementById("searchInput").value.toLowerCase();
+      const products = document.querySelectorAll(".product");
+
+      products.forEach(product => {
+        const name = product.querySelector("h2").textContent.toLowerCase();
+        if (name.includes(input)) {
+          product.style.display = "block";
+        } else {
+          product.style.display = "none";
+        }
+      });
+    }
+
+    // حالت تاریک
+    const modeToggle = document.getElementById("modeToggle");
+    modeToggle.addEventListener("click", () => {
+      document.body.classList.toggle("dark-mode");
+      if(document.body.classList.contains("dark-mode")){
+        modeToggle.textContent = "☀️";
+      } else {
+        modeToggle.textContent = "🌓";
+      }
+    });
+
+    // دکمه بازگشت به بالا
+    const backToTop = document.getElementById("back-to-top");
+    window.addEventListener("scroll", () => {
+      if(window.scrollY > 200){
+        backToTop.style.display = "block";
+      } else {
+        backToTop.style.display = "none";
+      }
+    });
+
+    backToTop.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    // بارگذاری اولیه
+    updateCart();
+  </script>
+</body>
+</html>

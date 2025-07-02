@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+  <meta charset="UTF-8">
+  <title>محصولات - فروشگاه من</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>محصولات فروشگاه</h1>
+    <nav>
+      <a href="index.html">خانه</a>
+      <a href="products.html">محصولات</a>
+      <a href="contact.html">پشتیبانی</a>
+      <a href="contact1.html">تماس با ما</a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- 🔍 نوار جستجو -->
+    <div class="search-container" style="text-align: center; margin: 20px;">
+      <input type="text" id="searchInput" onkeyup="searchProducts()" placeholder="جستجوی محصول..." style="padding: 10px; width: 80%; max-width: 400px; border-radius: 5px; border: 1px solid #ccc;">
+    </div>
+    <!-- تبلیغ -->
+<div style="text-align: center; margin: 30px 0;">
+  <img src="https://s6.uupload.ir/files/img_20250702_025833_854_fkfw.jpg" alt="ارزان سرای جورواجور" style="max-width: 100%; height: auto; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.2);">
+</div>
+
+<!-- لیست محصولات از اینجا شروع میشه -->
+<section class="products">
+
+    <!-- 🛍️ محصولات -->
+    <section class="products">
+      <div class="product">
+        <img src="https://via.placeholder.com/150" alt="کفش اسپرت">
+        <h2>کفش اسپرت</h2>
+        <p>کفش سبک و راحت برای پیاده‌روی روزمره</p>
+        <p><strong>قیمت: 250000 تومان</strong></p>
+      </div>
+
+      <div class="product">
+        <img src="https://via.placeholder.com/150" alt="ایرپاد پرو">
+        <h2>ایرپاد پرو</h2>
+        <p>مناسب گوش دادن موزیک و مکالمه‌های معمولی</p>
+        <p><strong>قیمت: 550000 تومان</strong></p>
+      </div>
+
+      <div class="product">
+        <img src="https://via.placeholder.com/150" alt="تیشرت باشگاهی">
+        <h2>تیشرت باشگاهی</h2>
+        <p>مناسب تمامی ورزش‌ها</p>
+        <p><strong>قیمت: 430000 تومان</strong></p>
+      </div>
+    </section>
+
+    <!-- 🔝 دکمه بازگشت به بالا -->
+    <div style="text-align: center; margin: 30px;">
+      <a href="#top" style="padding: 10px 20px; background-color: #009688; color: white; border-radius: 5px; text-decoration: none;">⬆️ بازگشت به بالا</a>
+    </div>
+  </main>
+
+  <footer>
+    <p>© 2025 فروشگاه من</p>
+  </footer>
+
+  <script>
+    function searchProducts() {
+      const input = document.getElementById("searchInput").value.toLowerCase();
+      const products = document.querySelectorAll(".product");
+
+      products.forEach(product => {
+        const title = product.querySelector("h2").textContent.toLowerCase();
+        const desc = product.querySelector("p").textContent.toLowerCase();
+        if (title.includes(input) || desc.includes(input)) {
+          product.style.display = "block";
+        } else {
+          product.style.display = "none";
+        }
+      });
+    }
+  </script>
+</body>
+</html>

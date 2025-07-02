@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>تماس با ما</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      font-family: 'Tahoma', sans-serif;
+      background-color: #f9f9f9;
+      color: #333;
+      margin: 0;
+      padding: 0;
+    }
+
+    body.dark-mode {
+      background-color: #121212;
+      color: #eee;
+    }
+
+    nav {
+      background-color: #007BFF;
+      color: white;
+      padding: 15px;
+      text-align: center;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin: 0 12px;
+      font-weight: bold;
+    }
+
+    .container {
+      max-width: 700px;
+      margin: 40px auto;
+      padding: 20px;
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    body.dark-mode .container {
+      background-color: #1f1f1f;
+      box-shadow: 0 2px 10px rgba(255,255,255,0.05);
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .info p {
+      line-height: 2;
+      margin: 0 0 10px;
+    }
+
+    .info strong {
+      color: #007BFF;
+    }
+
+    form {
+      margin-top: 30px;
+    }
+
+    form label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+
+    form input,
+    form textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+
+    form button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #007BFF;
+      border: none;
+      color: white;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    form button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="index.html">خانه</a>
+    <a href="about.html">درباره ما</a>
+    <a href="contact.html">تماس با ما</a>
+  </nav>
+
+  <div class="container">
+    <h1>تماس با ما</h1>
+
+    <div class="info">
+      <p><strong>📍 آدرس:</strong> تهران، خیابان ولیعصر، ساختمان شماره ۱۲</p>
+      <p><strong>📞 تلفن:</strong> 021-12345678</p>
+      <p><strong>📱 موبایل:</strong> 09123456789</p>
+      <p><strong>✉️ ایمیل:</strong> info@example.com</p>
+    </div>
+
+    <form onsubmit="handleContactSubmit(event)">
+      <label for="name">نام</label>
+      <input type="text" id="name" required />
+
+      <label for="email">ایمیل</label>
+      <input type="email" id="email" required />
+
+      <label for="message">پیام</label>
+      <textarea id="message" rows="5" required></textarea>
+
+      <button type="submit">ارسال پیام</button>
+    </form>
+  </div>
+
+  <script>
+    // اعمال حالت تاریک اگر فعال باشد
+    window.onload = () => {
+      if (localStorage.getItem("darkMode") === "true") {
+        document.body.classList.add("dark-mode");
+      }
+    };
+
+    // مدیریت ارسال فرم
+    function handleContactSubmit(event) {
+      event.preventDefault();
+      alert("پیام شما با موفقیت ارسال شد! (شبیه‌سازی)");
+      document.getElementById("name").value = "";
+      document.getElementById("email").value = "";
+      document.getElementById("message").value = "";
+    }
+  </script>
+</body>
+</html>

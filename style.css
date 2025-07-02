@@ -1,0 +1,295 @@
+/* ریست اولیه */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  direction: rtl;
+  font-family: 'Vazirmatn', sans-serif;
+}
+
+/* تنظیمات کلی */
+body {
+  background-color: #f9f9f9;
+  color: #333;
+  margin: 0;
+  padding: 0;
+}
+
+/* هدر */
+header {
+  background-color: #009688;
+  padding: 20px;
+  text-align: center;
+  color: white;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+header h1 {
+  font-size: 28px;
+  margin-bottom: 10px;
+}
+
+/* منو */
+nav {
+  margin-top: 10px;
+}
+
+nav a {
+  color: white;
+  margin: 0 15px;
+  font-weight: bold;
+  font-size: 16px;
+  text-decoration: none;
+  transition: text-decoration 0.3s;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
+
+/* لینک‌ها عمومی */
+a {
+  text-decoration: none;
+  color: #333;
+  padding: 10px;
+  transition: color 0.3s;
+}
+
+a:hover {
+  color: #009688;
+}
+
+/* تیترها */
+h1, h2 {
+  color: #333;
+  text-align: center;
+}
+
+/* محصولات */
+.products {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  margin: 40px 0;
+}
+
+.product {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  padding: 15px;
+  width: 220px;
+  text-align: center;
+  transition: transform 0.2s ease;
+}
+
+.product:hover {
+  transform: scale(1.03);
+}
+
+.product img {
+  width: 100%;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.product h2 {
+  font-size: 18px;
+  margin: 10px 0;
+}
+
+.product p {
+  font-size: 14px;
+  color: #555;
+}
+
+/* دکمه افزودن به سبد */
+.product button {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.product button:hover {
+  background-color: #218838;
+}
+
+/* سبد خرید */
+#cart {
+  background-color: white;
+  border-radius: 8px;
+  padding: 20px;
+  margin: 20px auto;
+  max-width: 600px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* فرم تسویه حساب */
+#checkout {
+  background-color: white;
+  border-radius: 8px;
+  padding: 20px;
+  margin: 30px auto;
+  max-width: 400px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+#checkout label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+#checkout input,
+#checkout textarea {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+#checkout button {
+  background-color: green;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+#checkout button:hover {
+  background-color: darkgreen;
+}
+
+/* فوتر */
+footer {
+  background-color: #333;
+  color: white;
+  text-align: center;
+  padding: 15px;
+  margin-top: 30px;
+}
+#backToTop {
+  position: fixed;
+  bottom: 30px;
+  left: 30px;
+  padding: 10px 15px;
+  background-color: #009688;
+  color: white;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+  font-size: 14px;
+  transition: opacity 0.3s;
+  z-index: 999;
+}
+#backToTop:hover {
+  background-color: #00796b;
+}
+.search-container input {
+  padding: 12px;
+  font-size: 16px;
+  border: 1px solid #aaa;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+.banner {
+  margin: 20px auto;
+  text-align: center;
+}
+
+.banner img {
+  max-width: 100%;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+/* اسلایدر تبلیغاتی */
+.slider {
+  width: 100%;
+  max-width: 1000px;
+  margin: 30px auto;
+  overflow: hidden;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.slides {
+  display: flex;
+  width: 300%;
+  animation: slide 9s infinite;
+}
+
+.slides img {
+  width: 100%;
+  flex-shrink: 0;
+}
+
+@keyframes slide {
+  0%   { transform: translateX(0%); }
+  33%  { transform: translateX(-100%); }
+  66%  { transform: translateX(-200%); }
+  100% { transform: translateX(0%); }
+}
+.about-section {
+  max-width: 700px;
+  margin: 40px auto;
+  background-color: #fff;
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  line-height: 1.9;
+  font-size: 1.1rem;
+}
+
+.about-section h2 {
+  color: #222;
+  margin-bottom: 16px;
+}
+
+.about-section ul {
+  padding-right: 20px;
+  list-style: square;
+}
+
+body.dark-mode .about-section {
+  background-color: #1c1c1c;
+  color: #ddd;
+}
+.contact-info {
+  margin-top: 40px;
+  background: #f9f9f9;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.contact-info h2 {
+  margin-bottom: 15px;
+  font-size: 20px;
+  color: #333;
+}
+
+.contact-info p {
+  margin: 8px 0;
+  font-size: 16px;
+}
+
+.contact-info a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+body.dark-mode .contact-info {
+  background: #2a2a2a;
+}
+
+body.dark-mode .contact-info h2,
+body.dark-mode .contact-info p {
+  color: #f2f2f2;
+}
